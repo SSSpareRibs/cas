@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+    <title>注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- font files  -->
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+    <!-- /font files  -->
+    <!-- css files -->
+    <link href="/config/style_m.css" rel='stylesheet' type='text/css' media="all" />
+    <!-- /css files -->
+</head>
+<body>
+<h1></h1>
+<div class="log">
+
+    <div class="content2" style="margin-left: -115px;">
+        <h2>注 册</h2>
+
+        <input id="passUrl" style="display: none">
+        <input type="text"    name="userName" id="userName"  value="用户名,只能是2-16位的中文英文数字" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '用户名,只能是2-16位的中文英文数字';}">
+        <input type="password" name="passWord" id="passWord" value="请输入密码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请输入密码';}">
+        <input type="password"    name="rpassword" id="rpassword" value="请确认密码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请确认密码';}">
+        <input type="text" name="email" id="email" value="请输入邮箱" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请输入邮箱';}">
+        <input type="button" class="register" value="Register" onclick="submit2()" id="subbutto">
+
+    </div>
+    <div class="clear"></div>
+</div>
+
+</body>
+<script type="text/javascript">
+    window.onload = function()
+    {
+        var callbackUrl=window.location.href;
+        document.getElementById("passUrl").value = callbackUrl;
+    }
+
+    function submit2() {
+        var username = $("#userName").val();
+        var passWord=$("#passWord").val();
+        var rpassword=$("#rpassword").val();
+        var email=$("#email").val();
+
+        if (username.length === 0) {
+            // $("#error_message").text("用户名不能为空");
+            alert("用户名不能为空")
+            return ;
+        }
+        if (passWord.length === 0) {
+            // $("#error_message").text("密码不能为空");
+            alert("密码不能为空")
+            return ;
+        }
+        if (email.length === 0) {
+            alert("邮箱不能为空")
+            //$("#error_message").text("邮箱不能为空");
+            return ;
+        }
+
+        if(passWord!=rpassword){
+            // $("#error_message").text("两次密码不同");
+            alert("两次密码不同")
+            return ;
+        }
+
+
+
+        $.ajax({
+            url: "/config/regist",
+            async: true,
+            cache: false,
+            type: "get",
+            dataType: "json",
+            data: {
+                passUrl: $("#passUrl").val(),
+                username:$("#userName").val(),
+                passWord:$("#passWord").val(),
+                email:$("#email").val()
+
+            },
+            // data: JSON.stringify($("#login_form").serializeJson()),
+            success: function (data) {
+                var result = data.data;
+                if (data.success) {
+                    alert(result.messege);
+                    window.location.href=result.backUrl;
+
+                }else{
+                    alert(result.messege);
+                }
+
+            }
+
+        });
+
+    }
+</script>
+
+</html>

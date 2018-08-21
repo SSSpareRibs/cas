@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <link rel="stylesheet" type="text/css"  th:href="@{${#themes.code('style.css.file')}}">
+    <link rel="stylesheet" type="text/css"  th:href="@{${#themes.code('userpanel.css.file')}}">
+    <link rel="stylesheet" type="text/css"  th:href="@{${#themes.code('style_log.css.file')}}">
+    <link rel="stylesheet" type="text/css"  th:href="@{${#themes.code('jquery.ui.all.css.file')}}">
+
+</head>
+<script type="text/javascript">
+
+    function a() {
+        var test = window.location.href;
+        document.getElementById("adds").href="http://localhost:8888/config/regist.html?service="+test;
+        $("#adds" ).trigger( "click" );
+    }
+
+</script>
+
+<body class="login" mycollectionplug="bind">
+<div class="login_m">
+
+    <div class="login_boder">
+        <form method="post" th:object="${credential}">
+            <div class="login_padding" id="login_model">
+
+                <h2>USERNAME</h2>
+                <label>
+                    <input type="text"   id="username"   th:disabled="${guaEnabled}"  th:field="*{username}"  th:accesskey="#{screen.welcome.label.netid.accesskey}" class="txt_input txt_input2">
+                </label>
+                <h2>PASSWORD</h2>
+                <label>
+                    <input type="password" name="textfield2" id="password" autocomplete="off" th:field="*{password}" th:accesskey="#{screen.welcome.label.password.accesskey}" class="txt_input" >
+                </label>
+
+                <p><a onclick="a()" id="adds" style="">注册</a></p>
+
+            </div>
+
+            <section>
+                <input type="hidden" name="execution" th:value="${flowExecutionKey}"/>
+                <input type="hidden" name="_eventId" value="submit"/>
+                <input type="hidden" name="geolocation"/>
+                <input class="btn btn-submit btn-block" style="text-align: center;width: 70px; height: 27px;margin-left: 292px; margin-top: -5px;"
+                       name="submit"
+                       accesskey="l"
+                       th:value="#{screen.welcome.button.login}"
+                       tabindex="6"
+                       type="submit"/>
+            </section>
+        </form>
+
+    </div>
+</div>
+</body>
+
+</html>

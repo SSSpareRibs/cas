@@ -1,0 +1,14 @@
+{
+  "@class": "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" : "^(https|imaps|http)://.*",
+  "name": "ShiroClient-demo",
+  "id": 10000000,
+  "description": "ShiroClient-demo service",
+  "evaluationOrder": 100,
+  "theme":"demo",
+  "logoutUrl": "http:////.*/logout",
+  "attributeReleasePolicy" : {
+    "@class" : "org.apereo.cas.services.ReturnAllowedAttributeReleasePolicy",
+    "allowedAttributes" : [ "java.util.ArrayList", [ "school_multi", "id" ,"username","password","attemptstime","intime","email"] ]
+  }
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- font files  -->
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Nunito:400,300,700' rel='stylesheet' type='text/css'>
+    <!-- /font files  -->
+    <!-- css files -->
+    <link rel="stylesheet" type="text/css"  th:href="@{${#themes.code('style.css.file')}}">
+    <!-- /css files -->
+</head>
+<script type="text/javascript">
+
+    function a() {
+        var test = window.location.href;
+        document.getElementById("adds").href="http://172.17.1.10:8888/config/a.html?service="+test;
+        $("#adds" ).trigger( "click" );
+    }
+
+</script>
+
+<body >
+<h1></h1>
+<div class="log">
+    <div class="content1" style="margin-left: 373px;">
+        <h2>登录</h2>
+        <form method="post" th:object="${credential}">
+            <input type="text" name="username"  id="username" value="USERNAME" th:disabled="${guaEnabled}"  th:field="*{username}"  th:accesskey="#{screen.welcome.label.netid.accesskey}"  onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}">
+            <input type="password" name="psw" id="password" value="PASSWORD" th:field="*{password}" th:accesskey="#{screen.welcome.label.password.accesskey}" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'PASSWORD';}">
+            <div class="button-row">
+                <section>
+                    <input type="hidden" name="execution" th:value="${flowExecutionKey}"/>
+                    <input type="hidden" name="_eventId" value="submit"/>
+                    <input type="hidden" name="geolocation"/>
+                    <input class="sign-in"
+                           name="submit"
+                           accesskey="l"
+                           th:value="#{screen.welcome.button.login}"
+                           tabindex="6"
+                           type="submit"/>
+                </section>
+                <a onclick="a()" id="adds" class="reset" value="Reset">注册</a>
+                <div class="clear"></div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="clear"></div>
+</div>
+
+</body>
+</html>
